@@ -18,8 +18,6 @@ namespace Cake\Database\Dialect;
 
 use Cake\Database\Expression\FunctionExpression;
 use Cake\Database\QueryCompiler;
-use Cake\Database\Schema\BaseSchema;
-use Cake\Database\Schema\SqliteSchema;
 use Cake\Database\SqlDialectTrait;
 use Cake\Database\SqliteCompiler;
 
@@ -50,7 +48,7 @@ trait SqliteDialectTrait
     /**
      * The schema dialect class for this driver
      *
-     * @var \Cake\Database\Schema\SqliteSchema
+     * @var \Cake\Database\Dialect\SqliteSchemaDialect
      */
     protected $_schemaDialect;
 
@@ -165,12 +163,12 @@ trait SqliteDialectTrait
      * Used by Cake\Database\Schema package to reflect schema and
      * generate schema.
      *
-     * @return \Cake\Database\Schema\BaseSchema
+     * @return \Cake\Database\Dialect\SchemaDialect
      */
-    public function schemaDialect(): BaseSchema
+    public function schemaDialect(): SchemaDialect
     {
         if ($this->_schemaDialect === null) {
-            $this->_schemaDialect = new SqliteSchema($this);
+            $this->_schemaDialect = new SqliteSchemaDialect($this);
         }
 
         return $this->_schemaDialect;
